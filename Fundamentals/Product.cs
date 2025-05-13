@@ -21,8 +21,20 @@ public class Product : IProduct
     var discountAmount = Price * (percentage / 100);
     Price -= discountAmount;
   }
-  public string GetDescription()
+  public virtual string GetDescription()
   {
     return $"{Name} - {Price:C}";
+  }
+}
+class ServiceProduct : Product
+{
+  public int DurationInDays { get; set; }
+  public ServiceProduct(string name, decimal price, int duration) : base(name, price)
+  {
+    DurationInDays = duration;
+  }
+  public override string GetDescription()
+  {
+    return $"{base.GetDescription()} - Duración: {DurationInDays} días";
   }
 }
